@@ -2,20 +2,25 @@ import os, csv
 import talib
 import yfinance as yf
 import pandas
-from flask import Flask, escape, request, render_template
+from flask import Flask, Response, escape, request, render_template
 from patterns import candlestick_patterns
 from patterns_old import candle
-
+from chart_test import *
+from tqdm import tqdm
+import io
+import random
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
 app = Flask(__name__)
 
 @app.route('/snapshot')
 def snapshot():
     with open('datasets/symbols.csv') as f:
-        for line in f:
+        for line in tqdm(f):
             if "," not in line:
                 continue
             symbol = line.split(",")[0]
-            data = yf.download(symbol, start="2021-01-01", end="2021-02-01")
+            data = yf.download(symbol, start="2020-06-01", end="2021-04-07")
             data.to_csv('datasets/daily/{}.csv'.format(symbol))
 
     return {
@@ -30,9 +35,11 @@ def index():
     # with open('datasets/symbols.csv') as f:
         # for row in csv.reader(f):
             # stocks[row[0]] = {'company': row[1]}
-
+    bar = create_plot('ACC.NS')
     if pattern:
         print(pattern)
+        bar = create_plot(pattern)
+
         # for filename in os.listdir('datasets/daily'):
         # filename = 'datasets/daily/{}'.format(pattern)
         print('YOYOYOYOYOY')
@@ -63,4 +70,4 @@ def index():
             except Exception as e:
                 print('failed on filename: ', pattern, e)
 
-    return render_template('index.html', candlestick_patterns=candlestick_patterns, stocks=stocks, pattern=pattern, candle= candle)
+    return render_template('index.html',plot = bar, candlestick_patterns=candlestick_patterns, stocks=stocks, pattern=pattern, candle= candle)

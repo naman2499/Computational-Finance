@@ -1,4 +1,6 @@
 <html>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 <head>
     <style>
         body { font-family: arial; margin: 20px; }
@@ -19,7 +21,12 @@
 
         <input type="submit" value="Scan" />
     </form>
-
+    <div class="chart" id="bargraph">
+        <script>
+            var graphs = {{plot | safe}};
+            Plotly.plot('bargraph',graphs,{});
+        </script>
+    </div>
     <table>
         <!-- <tr>
             <th>symbol</th>
