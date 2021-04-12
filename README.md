@@ -1,1 +1,1 @@
-web-based technical screener for candlestick patterns using TA-Lib, Python, and Flask.
+web-based technical screener for candlestick patterns and future predictions using TA-Lib, Python, lstm models and Flask.

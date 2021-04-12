@@ -1,3 +1,5 @@
+# needs numpy 1.2
+
 import os, csv
 import talib
 import yfinance as yf
@@ -11,6 +13,7 @@ import io
 import random
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
+# from lstm import *
 app = Flask(__name__)
 
 @app.route('/snapshot')
@@ -39,7 +42,7 @@ def index():
     if pattern:
         print(pattern)
         bar = create_plot(pattern)
-
+        
         # for filename in os.listdir('datasets/daily'):
         # filename = 'datasets/daily/{}'.format(pattern)
         print('YOYOYOYOYOY')
