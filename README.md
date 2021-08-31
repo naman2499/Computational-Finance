@@ -1,1 +1,1 @@
-web-based technical screener for candlestick patterns and future predictions using TA-Lib, Python, lstm models with sentiment analysis and Flask.
+Candlestick patterns detection for nifty 200 companies. LSTM with sentiment analysis for market index. Web app deployed using Flask.
